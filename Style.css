@@ -26,8 +26,8 @@ nav {
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: 1px;
-    margin-right: auto;
 }
+
 .navi-links{
     list-style: none;
     position: absolute;
@@ -71,6 +71,8 @@ main p{
     margin-bottom: 20px;
 }
 footer{
+    display: flex;
+    justify-content: center;
     align-items: center;
     padding: 2rem;
 }
@@ -118,9 +120,9 @@ button:hover {
     .navi-links {
     position: absolute;
     right: 0px;
-    top: 60px;
+    top: var(--nav-height);
     height: 92vh;
-    background-color: #0d6eff;
+    background-color: var(--primary-blue);;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -152,8 +154,6 @@ button:hover {
         position: static;
         transform: none !important;
         display:flex;
-        top: auto;
-        right: auto;
         height: auto;
         width: auto;
         flex-direction: row;
