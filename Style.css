@@ -137,14 +137,18 @@ button:hover {
 .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
 @media screen and (min-width: 601px) {
-   .page { font-size: 1.75rem; }
+   .page { font-size: 1.75rem; 
+    }
 
-    .burger { display: none; }
+    .burger { display: none; 
+    }
 
     .navi-links {
         position: static;
         transform: none !important;
         display:flex;
+        top: auto;
+        right: auto;
         height: auto;
         width: auto;
         flex-direction: row;
