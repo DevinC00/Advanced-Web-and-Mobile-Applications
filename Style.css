@@ -5,21 +5,29 @@
 }
 :root {
     --primary-blue: #0d6eff;
+    --dark-blue: #0A4EB5;
     --nav-height: 70px;
 }
+
+.banner {
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 1.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+/* FIXED: Changed fixed to relative so it drops below the banner naturally */
 nav {
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: center; 
     width: 100%;
     height: var(--nav-height);
-    position: fixed; 
-    top: 0; 
-    left: 0;
+    position: relative; 
     background-color: var(--primary-blue);
     color: white;
     padding: 0 1.5rem;
-    backdrop-filter: blur(20px);
     z-index: 1000;
 }
 .page{
@@ -42,6 +50,8 @@ nav {
     gap: 1.8rem;    
     transform: translateX(100%);
     transition: transform 0.4s ease-in-out;
+    background-color: var(--primary-blue);
+    z-index: 999;
 }
 .navi-links li a{
     position: relative;
@@ -58,7 +68,6 @@ body {
     font-family: 'Aptos', 'Calibri', sans-serif;
     background: #f4f4f4;
     color: black;
-    padding-top: var(--nav-height); 
     overflow-x: hidden;
 }
 main {
@@ -66,18 +75,49 @@ main {
     max-width: 1100px; 
     margin: 1.5rem auto; 
     padding: 0 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    flex: 1;
 }
-main p{
+
+main h2 {
+    font-size: 1.8rem;
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+main p {
     margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    color: #444;
 }
-footer{
+
+footer {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    background-color: var(--dark-blue); 
+    width: 100%;
 }
 
-button {
+footer a {
+    color: white; 
+    text-decoration: none; 
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #f4f4f4; /* Subtle off-white change on cursor hover */
+    text-decoration: underline; /* Puts underline back ONLY when hovering */
+}
+
+button:not(.spa-btn) {
     display: block;
     margin: 0 auto;
     padding: 10px 20px;
@@ -86,7 +126,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:not(.spa-btn):hover {
     color: black;
 }
 
@@ -97,7 +137,7 @@ button:hover {
 }
 
 .burger {
-  display: none; 
+  display: block; 
   cursor: pointer;
   background: transparent;
   border: none;
@@ -118,19 +158,17 @@ button:hover {
 
 @media screen and (min-width: 600px) {
     .navi-links {
-    position: absolute;
-    right: 0px;
-    top: var(--nav-height);
-    height: 92vh;
-    background-color: var(--primary-blue);;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60%;
-    transform: translateX(100%); 
-    transition: transform 0.5s ease-in;
-    }
-    .burger { display: block; 
+        position: absolute;
+        right: 0px;
+        top: var(--nav-height);
+        height: 92vh;
+        background-color: var(--primary-blue);;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        transform: translateX(100%); 
+        transition: transform 0.5s ease-in;
     }
 }
 
@@ -144,10 +182,7 @@ button:hover {
 .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
 @media screen and (min-width: 601px) {
-   .page { font-size: 1.75rem; 
-    }
-
-    .burger { display: none; 
+    .burger { display: none !important; 
     }
 
     .navi-links {
