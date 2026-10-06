@@ -33,7 +33,7 @@ $(document).ready(function() {
                         <p class="edition-tag" style="margin-top: 10px;">Featured Single Book</p>
                         ${firstSentenceHtml}
                         <ul class="meta-list">
-                            <li><strong>Author Reference:</strong> ${authorName}</li>
+                            <li><strong>Author:</strong> ${authorName}</li>
                             <li><strong>Publisher:</strong> ${book.publishers ? book.publishers.join(', ') : 'N/A'}</li>
                             <li><strong>Publish Date:</strong> ${book.publish_date || 'N/A'}</li>
                             <li><strong>Page Count:</strong> ${book.number_of_pages || 'N/A'} pages</li>
