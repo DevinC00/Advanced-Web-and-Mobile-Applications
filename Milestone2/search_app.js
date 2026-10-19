@@ -1,25 +1,19 @@
 $(document).ready(function () {
-    // -------------------------------------------------------------
-    // Application State Variables
-    // -------------------------------------------------------------
+    // App State Variables
     let currentSearchTerm = "";
     let currentPage = 1;
     let currentLimit = 60;
     let totalResultsFound = 0;
 
-    // -------------------------------------------------------------
-    // Event Initializations
-    // -------------------------------------------------------------
-
     // Primary Form Submission Handler
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
         
-        // Capture context state inputs cleanly
+        // Capture context state inputs
         currentSearchTerm = $("#searchInput").val().trim();
         currentLimit = parseInt($("#limitSelect").val(), 10);
         
-        // A brand-new search resets execution back to page 1
+        // new search resets back to page 1
         currentPage = 1;
 
         if (currentSearchTerm) {
@@ -42,7 +36,7 @@ $(document).ready(function () {
         }
     });
 
-    // Live Dropdown Filter Mutation Handler
+    // Dropdown Filter Mutation Handler
     $("#limitSelect").on("change", function () {
         currentLimit = parseInt($(this).val(), 10);
         if (currentSearchTerm) {
@@ -50,46 +44,31 @@ $(document).ready(function () {
             fetchBooks();
         }
     });
-
-    // -------------------------------------------------------------
+    
     // Core API Fetch Operations
-    // -------------------------------------------------------------
     function fetchBooks() {
         showLoadingState();
 
         const encodedQuery = encodeURIComponent(currentSearchTerm);
-        
-        // CRITICAL UPDATE: We must explicitly tell Open Library exactly what fields we want.
-        // This drops the download from 500KB per request down to a tiny 5KB, preventing browser blockades.
+
         const targetFields = "key,title,author_name,cover_i";
         const apiURL = `https://openlibrary.org${encodedQuery}&page=${currentPage}&limit=${currentLimit}&fields=${targetFields}`;
 
-        // Using native browser Fetch API wrapped in our jQuery loader
-        fetch(apiURL, {
+        $.ajax([
+            url: apiURL,
             method: "GET",
-            headers: {
-                "Accept": "application/json"
+            dataType: "json",
+            success: function(data) {
+                totalResultsFound = data.numFound || 0;
+                renderResults(data.docs || []);
+            },
+            error: function (xhr, status, error) {
+                console.error("Open Library Query Failure:", {xhr, status, error});
+                showErrorState(xhr, status, error);
             }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP network error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            totalResultsFound = data.numFound || 0;
-            renderResults(data.docs || []);
-        })
-        .catch(error => {
-            console.error("Fetch Execution Failure:", error);
-            showErrorState(error.message || error);
         });
     }
-
-    // -------------------------------------------------------------
-    // View Rendering Modules
-    // -------------------------------------------------------------
+    // View Rendered results
     function renderResults(books) {
         const grid = $("#resultsGrid");
         const status = $("#statusMessage");
