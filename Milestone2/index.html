@@ -22,7 +22,7 @@
         
         <!-- Search and Filter Control Bar -->
         <section class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
-            <form id="searchForm" class="flex flex-col md:flex-row gap-4 items-end md:items-center">
+            <form id="searchForm" onsubmit="event.preventDefault(); return false;" class="flex flex-col md:flex-row gap-4 items-end md:items-center">
                 <!-- Search Input Field -->
                 <div class="flex-grow w-full">
                     <label for="searchInput" class="block text-xs font-semibold uppercase text-gray-500 mb-2 tracking-wider">Search Books by Title, Author, or Keyword</label>
