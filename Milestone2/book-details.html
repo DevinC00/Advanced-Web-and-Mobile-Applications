@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Details Profile</title>
-    <script src="https://tailwindcss.com"></script>
+    <title>Book Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
@@ -28,9 +28,10 @@
                     <div class="aspect-[2/3] w-full bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-inner">
                         <img 
                             id="bookCover" 
-                            src="https://placehold.co..." 
+                            src="https://placehold.co/400x600?text=No+Cover" 
                             alt="Book Cover" 
                             class="w-full h-full object-cover"
+                            loading="lazy"
                         >
                     </div>
                 </div>
@@ -55,6 +56,7 @@
                                 id="openLibraryLink" 
                                 href="#" 
                                 target="_blank" 
+                                rel="noopener noreferrer"
                                 class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-5 py-2.5 rounded-lg shadow transition duration-150 ease-in-out"
                             >
                                 View on Open Library
