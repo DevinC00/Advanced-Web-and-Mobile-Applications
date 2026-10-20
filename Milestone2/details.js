@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // 1. Extract the book ID from the URL.
+    // 1. Extract the book ID from the URl
     const urlParams = new URLSearchParams(window.location.search);
     let workId = urlParams.get("id");
 
@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
     }
 
-    // 3. Validate the work ID.
+    // 3. Validate the work ID
     if (!workId || !/^\/works\/OL\d+W$/.test(workId)) {
         showErrorState(
             "Invalid or missing book ID. Please return to the homepage and select a book."
@@ -69,18 +69,18 @@ $(document).ready(function () {
         }
     }
 
-    // 5. Render the book information.
+    // 5. book information
     function renderBookDetails(data, id) {
         const title = data.title || "Untitled Work";
 
-        // Book title.
+        // Book title Section
         document.title = title + " | Book Details";
         $("#bookTitle").text(title);
 
-        // Work ID.
+        // Work ID Section
         $("#bookWorkId").text(id);
 
-        // Description.
+        // Description Section
         let description =
             "No description is available for this book.";
 
@@ -95,7 +95,7 @@ $(document).ready(function () {
 
         $("#bookDescription").text(description);
 
-        // Cover image.
+        // Cover image
         let coverUrl = fallbackCover;
 
         if (Array.isArray(data.covers) && data.covers.length > 0) {
@@ -132,7 +132,7 @@ $(document).ready(function () {
         $("#bookDetailsContainer").removeClass("hidden");
     }
 
-    // 6. Loading state
+    // 6. Loading state Sectiom
     function showLoadingState() {
         $("#bookDetailsContainer").addClass("hidden");
 
@@ -149,7 +149,7 @@ $(document).ready(function () {
             .removeClass("hidden");
     }
 
-    // 7. Error state
+    // 7. Error state section
     function showErrorState(errorMsg) {
         $("#bookDetailsContainer").addClass("hidden");
 
