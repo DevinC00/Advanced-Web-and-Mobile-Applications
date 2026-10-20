@@ -8,7 +8,10 @@ $(document).ready(function () {
     // Primary Form Submission Handler
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
+        e.stopPropagation();
+        console.log("Form submission intercepted");
         newSearch();
+        return false;
     });
 
     function newSearch() {
