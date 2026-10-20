@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details Profile</title>
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <header class="bg-indigo-600 text-white shadow-md py-6">
+        <div class="container mx-auto px-4 max-w-4xl flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight"> Book Search SPA</h1>
+            <a href="index.html" class="bg-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                ← Back to Search
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+        
+        <div id="statusMessage" class="hidden text-center py-12"></div>
+
+        <article id="bookDetailsContainer" class="hidden bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+            <div class="flex flex-col md:flex-row gap-8 p-6 md:p-8">
+                
+                <div class="w-full md:w-1/3 flex-shrink-0">
+                    <div class="aspect-[2/3] w-full bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-inner">
+                        <img 
+                            id="bookCover" 
+                            src="https://placehold.co..." 
+                            alt="Book Cover" 
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div>
+                            <h2 id="bookTitle" class="text-3xl font-extrabold text-gray-900 leading-tight"></h2>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400">Work ID</h4>
+                            <p id="bookWorkId" class="text-sm font-mono text-indigo-600 bg-indigo-50 px-2 py-1 rounded inline-block mt-1"></p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400">Description</h4>
+                            <p id="bookDescription" class="text-gray-600 mt-1 text-base leading-relaxed whitespace-pre-line"></p>
+                        </div>
+
+                        <div class="pt-6 border-t border-gray-100">
+                            <a 
+                                id="openLibraryLink" 
+                                href="#" 
+                                target="_blank" 
+                                class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-5 py-2.5 rounded-lg shadow transition duration-150 ease-in-out"
+                            >
+                                View on Open Library
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="details.js"></script>
+</body>
+</html>
