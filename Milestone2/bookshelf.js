@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 1. Stores Open Library work IDs in an array
     const bookIds = [
-        "OL82563W",   // Harry Potter and the Philosopher's Stone
+        "OL8460139W",   // Harry Potter and the Philosopher's Stone
         "OL893414W",  // Dune
         "OL2679341W"  // The Magicians
     ];
