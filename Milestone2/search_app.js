@@ -127,7 +127,7 @@ $(document).ready(function () {
 
             let coverUrl = book.cover_i
                 ? "https://covers.openlibrary.org/b/id/" + 
-                   encodURIComponent(book.cover_i) +
+                   encodeURIComponent(book.cover_i) +
                 "-M.jpg"
                 : "https://placehold.co/300x450?text=No+Cover";
 
