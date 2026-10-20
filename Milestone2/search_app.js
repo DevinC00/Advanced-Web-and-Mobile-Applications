@@ -14,7 +14,7 @@ $(document).ready(function () {
     function newSearch() {
         // Capture context state inputs
         currentSearchTerm = $("#searchInput").val().trim();
-        currentLimit = parseInt($("#limitSelect").val(), 10);
+        currentLimit = parseInt($("#limitSelect").val(), 10 || 60);
         // new search resets back to page 1
         currentPage = 1;
 
