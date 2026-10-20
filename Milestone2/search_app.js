@@ -45,14 +45,14 @@ $(document).ready(function () {
         }
     });
     
-    // Core API Fetch Operations
+    // Core API AJAX Operations
     function fetchBooks() {
         showLoadingState();
 
         const encodedQuery = encodeURIComponent(currentSearchTerm);
 
         const targetFields = "key,title,author_name,cover_i";
-        const apiURL = `https://openlibrary.org${encodedQuery}&page=${currentPage}&limit=${currentLimit}&fields=${targetFields}`;
+        const apiURL = "https://openlibrary.org" + encodedQuery + "&page=" + currentPage + "&limit=" + currentLimit + "&fields=" + targetFields;
 
         $.ajax([
             url: apiURL,
@@ -91,7 +91,7 @@ $(document).ready(function () {
 
             let coverUrl = "https://placehold.co";
             if (book.cover_i) {
-                coverUrl = `https://openlibrary.org{book.cover_i}-M.jpg`;
+                coverUrl = "https://openlibrary.org" + book.cover_i + "-M.jpg";
             }
 
             const cardHtml = `
@@ -130,7 +130,7 @@ $(document).ready(function () {
         }
 
         pagination.removeClass("hidden");
-        $("#pageIndicator").text(`Page ${currentPage} of ${totalPagesCalculated}`);
+        $("#pageIndicator").text("Page" + currentPage + " of " + totalPagesCalculated);
 
         $("#prevBtn").prop("disabled", currentPage === 1);
         $("#nextBtn").prop("disabled", currentPage >= totalPagesCalculated);
