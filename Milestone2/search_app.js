@@ -6,20 +6,27 @@ $(document).ready(function () {
     let totalResultsFound = 0;
 
     // Primary Form Submission Handler
+    $("#submitSearchBtn").on("click", function (e) {
+        e.preventDefault();
+        NewSearch();
+    });
+
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
-        
+        NewSearch();
+    });
+
+    function NewSearch() {
         // Capture context state inputs
         currentSearchTerm = $("#searchInput").val().trim();
         currentLimit = parseInt($("#limitSelect").val(), 10);
-        
         // new search resets back to page 1
         currentPage = 1;
 
         if (currentSearchTerm) {
             fetchBooks();
         }
-    });
+    }
 
     // Pagination Click Bindings
     $("#prevBtn").on("click", function () {
@@ -45,7 +52,7 @@ $(document).ready(function () {
         }
     });
     
-    // Core API AJAX Operations
+    // Core API Fetch Operations
     function fetchBooks() {
         showLoadingState();
 
@@ -99,7 +106,7 @@ $(document).ready(function () {
 
             let coverUrl = "https://placehold.co";
             if (book.cover_i) {
-                coverUrl = "https://openlibrary.org" + book.cover_i + "-M.jpg";
+                coverUrl = "https://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg";
             }
 
             const cardHtml = `
