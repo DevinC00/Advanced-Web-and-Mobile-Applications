@@ -53,19 +53,27 @@ $(document).ready(function () {
 
         const targetFields = "key,title,author_name,cover_i";
         const apiURL = "https://openlibrary.org" + encodedQuery + "&page=" + currentPage + "&limit=" + currentLimit + "&fields=" + targetFields;
-
-        $.ajax([
-            url: apiURL,
+        fetch(apiURL,{
             method: "GET",
-            dataType: "json",
-            success: function(data) {
-                totalResultsFound = data.numFound || 0;
-                renderResults(data.docs || []);
-            },
-            error: function (xhr, status, error) {
-                console.error("Open Library Query Failure:", {xhr, status, error});
-                showErrorState(xhr, status, error);
+            headers: {
+                "Accept": "application/json"
+                "User-Agent": "BookFinderSPA/1.0 (educational project)"
             }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP network error! Status: " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            totalResultsFound = data.numFound || 0;
+            renderResults(data.docs || []);
+        })
+        .catch(error => {
+            console.error("Open Library Query Failure:", error);
+            const mockXhr = {status: "Network/Fetch Error" };
+            showErrorState(mockXhr, "error", error.message || error);
         });
     }
     // View Rendered results
