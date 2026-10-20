@@ -60,7 +60,7 @@ $(document).ready(function () {
             fields: targetFields
         });
         const apiURL = "https://openlibrary.org/search.json?" + searchs.toString();
-        const comtroller = new AbortController();
+        const controller = new AbortController();
         const timeoutId = setTimeout(function () {
             controller.abort();
         }, 15000);
@@ -79,20 +79,18 @@ $(document).ready(function () {
                 
                 return response.json();
             })
-            .then(data => {
+            .then(function (data) {
                 totalResultsFound = data.numFound || 0;
                 renderResults(data.docs || []);
             })
-            .catch(error => {
+            .catch(function (error) {
                 console.error("Open Library Query Failure:", error);
                 if (error.name === "AbortError") {
-                    showErrorState(
-                        "The request timed out." 
-                    );
+                    showErrorState("The request timed out." );
                 } else {
                     showErrorState(error.message || String(error));
                 }
-            });
+            })
             .finally(function() {
                 clearTimeout(timeoutId);
             });
