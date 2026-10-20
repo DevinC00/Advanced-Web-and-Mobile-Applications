@@ -8,11 +8,13 @@ $(document).ready(function () {
     // Primary Form Submission Handler
     $("#submitSearchBtn").on("click", function (e) {
         e.preventDefault();
+        e.stopPropogation();
         NewSearch();
     });
 
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
+        e.stopPropogation();
         NewSearch();
     });
 
@@ -30,6 +32,7 @@ $(document).ready(function () {
 
     // Pagination Click Bindings
     $("#prevBtn").on("click", function () {
+        e.preventDefault();
         if (currentPage > 1) {
             currentPage--;
             fetchBooks();
@@ -37,13 +40,13 @@ $(document).ready(function () {
     });
 
     $("#nextBtn").on("click", function () {
+        e.preventDefault();
         if (currentPage * currentLimit < totalResultsFound) {
             currentPage++;
             fetchBooks();
         }
     });
 
-    // Dropdown Filter Mutation Handler
     $("#limitSelect").on("change", function () {
         currentLimit = parseInt($(this).val(), 10);
         if (currentSearchTerm) {
@@ -102,7 +105,7 @@ $(document).ready(function () {
             const author = book.author_name ? escapeHtml(book.author_name.join(", ")) : "Unknown Author";
             
             const openLibraryKey = book.key ? book.key.replace("/works/", "") : "";
-            const detailsLink = `book-details.html?id=${openLibraryKey}`;
+            const detailsLink = "book-details.html?id=" + openLibraryKey;
 
             let coverUrl = "https://placehold.co";
             if (book.cover_i) {
