@@ -5,7 +5,7 @@ $(document).ready(function () {
     let currentLimit = 60;
     let totalResultsFound = 0;
 
-    // Primary Form Submission Handler
+    // Form Submission Handler
     $("#searchForm").on("submit", function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -15,7 +15,7 @@ $(document).ready(function () {
     });
 
     function newSearch() {
-        // Capture context state inputs
+        // Capture inputs
         currentSearchTerm = $("#searchInput").val().trim();
         currentLimit = parseInt($("#limitSelect").val(), 10 || 60);
         // new search resets back to page 1
@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
     }
 
-    // Pagination Click Bindings
+    // Pagination 
     $("#prevBtn").on("click", function (e) {
         e.preventDefault();
         if (currentPage > 1) {
@@ -98,7 +98,7 @@ $(document).ready(function () {
                 clearTimeout(timeoutId);
             });
     }
-    // View Rendered results
+    // View results
     function renderResults(books) {
         const grid = $("#resultsGrid");
         const status = $("#statusMessage");
