@@ -24,7 +24,7 @@ $(document).ready(function () {
     }
 
     // Pagination Click Bindings
-    $("#prevBtn").on("click", function () {
+    $("#prevBtn").on("click", function (e) {
         e.preventDefault();
         if (currentPage > 1) {
             currentPage--;
@@ -32,7 +32,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#nextBtn").on("click", function () {
+    $("#nextBtn").on("click", function (e) {
         e.preventDefault();
         if (currentPage * currentLimit < totalResultsFound) {
             currentPage++;
@@ -53,18 +53,23 @@ $(document).ready(function () {
         showLoadingState();
 
         const targetFields = "key,title,author_name,cover_i";
-        const searchs = new URLSearch({
+        const searchs = new URLSearchParams({
             q: currentSearchTerm,
             page: currentPage,
             limit:currentLimit,
             fields: targetFields
         });
-        const apiURL = "https://openlibrary.org/search.json" + searchs.toString();
+        const apiURL = "https://openlibrary.org/search.json?" + searchs.toString();
+        const comtroller = new AbortController();
+        const timeoutId = setTimeout(function () {
+            controller.abort();
+        }, 15000);
         fetch(apiURL,{
             method: "GET",
             headers: {
                 "Accept": "application/json"
-            }
+            },
+            signal: controller.signal
         })
             .then(function(response) {
                 if (!response.ok) {
@@ -80,7 +85,16 @@ $(document).ready(function () {
             })
             .catch(error => {
                 console.error("Open Library Query Failure:", error);
-                showErrorState(mockXhr, "error", error.message || error);
+                if (error.name === "AbortError") {
+                    showErrorState(
+                        "The request timed out." 
+                    );
+                } else {
+                    showErrorState(error.message || String(error));
+                }
+            });
+            .finally(function() {
+                clearTimeout(timeoutId);
             });
     }
     // View Rendered results
@@ -127,8 +141,7 @@ $(document).ready(function () {
                             alt="Cover for ${safeTitle}" 
                             class="w-full h-full object-cover group-hover:scale-105 transition duration-200"
                             loading="lazy"
-                            onerror="this.onerror=null;
-                            this.src='https://placehold.co/300x450?text=No+Cover'
+                            onerror="this.onerror=null; this.src='https://placehold.co/300x450?text=No+Cover';"
                         >
                     </div>
                     <div class="p-3 flex flex-col flex-grow justify-between">
@@ -157,7 +170,7 @@ $(document).ready(function () {
         }
 
         pagination.removeClass("hidden");
-        $("#pageIndicator").text(`Page" ${currentPage} of ${totalPagesCalculated}`);
+        $("#pageIndicator").text(`Page ${currentPage} of ${totalPagesCalculated}`);
 
         $("#prevBtn").prop("disabled", currentPage <= 1);
         $("#nextBtn").prop("disabled", currentPage >= totalPagesCalculated);
