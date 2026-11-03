@@ -339,7 +339,6 @@ footer {
     color: #6b7280;
 }
 
-/* Responsive Design */
 @media (min-width: 640px) {
     .header-container {
         flex-direction: row;
@@ -399,8 +398,6 @@ footer {
     }
 }
 
-
-/* Search Book Cards */
 .book-card {
     display: flex;
     flex-direction: column;
@@ -548,7 +545,6 @@ button:focus-visible {
     transform: none;
 }
 
-/* Book Details Labels */
 .details-label {
     font-size: 0.75rem;
     font-weight: 700;
